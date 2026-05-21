@@ -1,0 +1,28 @@
+export const products = [
+  {
+    model: 'CMF300M',
+    brand: 'Emerson',
+    category: 'Flow Measurement',
+    series: 'Micro Motion ELITE',
+    description: 'High accuracy Coriolis flow meter for liquids and gases.',
+    image: '/images/cmf300m.jpg',
+    datasheet: '/pdfs/cmf300m.pdf',
+    faq_q1: 'What is CMF300M?',
+    faq_a1: 'CMF300M is a Coriolis mass flow meter.',
+    faq_q2: 'Can it replace CMF200M?',
+    faq_a2: 'Yes, but verify flow range.',
+  },
+  {
+    model: 'EJA110E',
+    brand: 'Yokogawa',
+    category: 'Pressure Measurement',
+    series: 'EJX Series',
+    description: 'Differential pressure transmitter for flow and level.',
+    image: '/images/eja110e.jpg',
+    datasheet: '/pdfs/eja110e.pdf',
+    faq_q1: 'What is EJA110E?',
+    faq_a1: 'High-performance DP transmitter.',
+    faq_q2: 'What output signals?',
+    faq_a2: '4-20mA HART.',
+  },
+];

@@ -1,0 +1,16 @@
+[
+  {
+    "model": "CMF300M",
+    "brand": "Emerson",
+    "category": "Flow Measurement",
+    "subcategory": "Coriolis",
+    "series": "Micro Motion ELITE",
+    "description": "High accuracy Coriolis flow meter for liquids and gases.",
+    "image": "/images/cmf300m.jpg",
+    "datasheet": "/pdfs/cmf300m.pdf",
+    "faq_q1": "What is CMF300M?",
+    "faq_a1": "CMF300M is a Coriolis mass flow meter.",
+    "faq_q2": "Can it replace CMF200M?",
+    "faq_a2": "Yes, but verify flow range."
+  }
+]

@@ -1,0 +1,15 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+const categories = ['Flow Measurement', 'Pressure Measurement', 'Temperature Measurement', 'Level Measurement', 'Density & Viscosity', 'Gas Analysis', 'Liquid Analysis', 'PLC & DCS Cards', 'Valves & Actuators'];
+---
+
+<Layout metadata={{ title: 'Product Categories - Yinkor' }}>
+  <div class="container mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold">Product Categories</h1>
+    <ul class="mt-8 space-y-2">
+      {categories.map(cat => (
+        <li><a href={`/categories/${cat.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} class="text-blue-700 underline">{cat}</a></li>
+      ))}
+    </ul>
+  </div>
+</Layout>

@@ -1,0 +1,57 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import allProducts from '../../data/products.json';
+
+const categoryName = 'Flow Measurement';
+const allCategoryProducts = allProducts.filter(p => p.category === categoryName);
+// 提取所有不重复的二级分类
+const subcategories = [...new Set(allCategoryProducts.map(p => p.subcategory).filter(Boolean))];
+
+// 默认显示全部，或者通过 URL 参数 ?sub=xxx 筛选
+const url = new URL(Astro.request.url);
+const activeSub = url.searchParams.get('sub') || 'all';
+const filteredProducts = activeSub === 'all' 
+  ? allCategoryProducts 
+  : allCategoryProducts.filter(p => p.subcategory === activeSub);
+---
+
+<Layout metadata={{ title: `${categoryName} Instruments - Yinkor` }}>
+  <div class="container mx-auto px-4 py-10">
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- 侧边栏二级分类 -->
+      <aside class="md:w-1/4">
+        <h2 class="text-xl font-bold mb-4">Categories</h2>
+        <ul class="space-y-2">
+          <li>
+            <a href="/categories/flow-measurement" class={`${activeSub === 'all' ? 'text-blue-700 font-semibold' : 'text-gray-600'} hover:text-blue-700`}>
+              All Products
+            </a>
+          </li>
+          {subcategories.map(sub => (
+            <li>
+              <a href={`/categories/flow-measurement?sub=${encodeURIComponent(sub)}`} class={`${activeSub === sub ? 'text-blue-700 font-semibold' : 'text-gray-600'} hover:text-blue-700`}>
+                {sub}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      <!-- 产品列表 -->
+      <div class="md:w-3/4">
+        <h1 class="text-3xl font-bold mb-6">{categoryName}</h1>
+        {activeSub !== 'all' && <p class="text-gray-600 mb-4">Showing: <span class="font-semibold">{activeSub}</span></p>}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {filteredProducts.map(product => (
+            <a href={`/products/${product.model}`} class="block border rounded p-4 hover:shadow transition">
+              <h2 class="text-xl font-semibold">{product.model}</h2>
+              <p class="text-gray-600 text-sm">{product.brand} · {product.subcategory}</p>
+              <p class="mt-2 text-gray-700">{product.description}</p>
+            </a>
+          ))}
+        </div>
+        {filteredProducts.length === 0 && <p class="text-gray-500">No products found in this subcategory.</p>}
+      </div>
+    </div>
+  </div>
+</Layout>

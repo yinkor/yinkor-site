@@ -1,0 +1,15 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+const brands = ['Emerson', 'E+H', 'Yokogawa', 'Siemens', 'Honeywell', 'ABB', 'Cameron', 'Chuanyi'];
+---
+
+<Layout metadata={{ title: 'Brands - Yinkor' }}>
+  <div class="container mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold">Brands We Supply</h1>
+    <ul class="mt-8 space-y-2">
+      {brands.map(b => (
+        <li><a href={`/brands/${b.toLowerCase().replace(/ /g, '-').replace(/\+/g, '')}`} class="text-blue-700 underline">{b}</a></li>
+      ))}
+    </ul>
+  </div>
+</Layout>

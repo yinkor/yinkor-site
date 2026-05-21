@@ -1,0 +1,27 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const allProducts = [
+  // 这里复制与上面相同的 allProducts 数组（或者只保留 Emerson 的产品，但为了通用，复制全部然后筛选）
+  { model: 'CMF300M', brand: 'Emerson', category: 'Flow Measurement', series: 'Micro Motion ELITE', description: 'High accuracy Coriolis flow meter for liquids and gases.', image: '/images/cmf300m.jpg', datasheet: '/pdfs/cmf300m.pdf', faq_q1: 'What is CMF300M?', faq_a1: 'CMF300M is a Coriolis mass flow meter.', faq_q2: 'Can it replace CMF200M?', faq_a2: 'Yes, but verify flow range.' },
+  // 其他品牌的产品可以不放，或者放进去但是筛选时会被过滤掉
+];
+
+const brandName = 'ABB';
+const brandProducts = allProducts.filter(p => p.brand === brandName);
+---
+
+<Layout metadata={{ title: `${brandName} Products - Yinkor` }}>
+  <div class="container mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold">{brandName}</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {brandProducts.map(product => (
+        <a href={`/products/${product.model}`} class="block border p-4 rounded hover:shadow transition">
+          <h2 class="text-xl font-semibold">{product.model}</h2>
+          <p class="text-gray-600">{product.category}</p>
+          <p class="mt-2">{product.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
