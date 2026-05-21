@@ -2,21 +2,19 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export function getStaticPaths() {
-  const products = [
-    {
-      model: 'CMF300M',
-      brand: 'Emerson',
-    }
+  // 尝试改为真实产品数据，但仍然只返回一个固定路由 test
+  const items = [
+    { model: 'test', title: 'CMF300M - Emerson' }
   ];
-  return products.map((product) => ({
-    params: { model: product.model },
-    props: { product },
+  return items.map(item => ({
+    params: { model: item.model },
+    props: { title: item.title }
   }));
 }
 
-const { product } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <Layout>
-  <h1>{product.model} – {product.brand}</h1>
+  <h1>{title}</h1>
 </Layout>
