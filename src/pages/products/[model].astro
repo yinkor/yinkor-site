@@ -2,12 +2,15 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export function getStaticPaths() {
-  const items = [
-    { model: 'test', title: 'Hello' }
+  const products = [
+    {
+      model: 'CMF300M',
+      title: 'CMF300M - Emerson'
+    }
   ];
-  return items.map(item => ({
-    params: { model: item.model },
-    props: { title: item.title }
+  return products.map((product) => ({
+    params: { model: product.model },
+    props: { title: product.title }
   }));
 }
 
