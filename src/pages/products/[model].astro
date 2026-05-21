@@ -5,18 +5,18 @@ export function getStaticPaths() {
   const products = [
     {
       model: 'CMF300M',
-      title: 'CMF300M - Emerson'
+      brand: 'Emerson',
     }
   ];
   return products.map((product) => ({
     params: { model: product.model },
-    props: { title: product.title }
+    props: { product },
   }));
 }
 
-const { title } = Astro.props;
+const { product } = Astro.props;
 ---
 
 <Layout>
-  <h1>{title}</h1>
+  <h1>{product.model} – {product.brand}</h1>
 </Layout>
