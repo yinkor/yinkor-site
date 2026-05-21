@@ -2,12 +2,23 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export function getStaticPaths() {
-  return [{ params: { model: 'test' }, props: { name: 'Test Product' } }];
+  const products = [
+    {
+      model: 'CMF300M',
+      brand: 'Emerson',
+      description: 'High accuracy Coriolis flow meter for liquids and gases.',
+    },
+  ];
+  return products.map((product) => ({
+    params: { model: product.model },
+    props: { product },
+  }));
 }
 
-const { name } = Astro.props;
+const { product } = Astro.props;
 ---
 
 <Layout>
-  <h1>{name}</h1>
+  <h1>{product.model} – {product.brand}</h1>
+  <p>{product.description}</p>
 </Layout>
