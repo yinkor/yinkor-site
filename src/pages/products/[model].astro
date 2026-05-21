@@ -2,72 +2,18 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export function getStaticPaths() {
-  const products = [
-    {
-      model: 'CMF300M',
-      brand: 'Emerson',
-      category: 'Flow Measurement',
-      subcategory: 'Coriolis',
-      series: 'Micro Motion ELITE',
-      description: 'High accuracy Coriolis flow meter for liquids and gases.',
-      image: '/images/cmf300m.jpg',
-      datasheet: '/pdfs/cmf300m.pdf',
-      faq_q1: 'What is CMF300M?',
-      faq_a1: 'CMF300M is a Coriolis mass flow meter.',
-      faq_q2: 'Can it replace CMF200M?',
-      faq_a2: 'Yes, but verify flow range.',
-    },
+  const items = [
+    { model: 'test', title: 'Hello' }
   ];
-  return products.map((product) => ({
-    params: { model: product.model },
-    props: { product },
+  return items.map(item => ({
+    params: { model: item.model },
+    props: { title: item.title }
   }));
 }
 
-const { product } = Astro.props;
-if (!product) return <Layout>Product not found</Layout>;
-
-const pageTitle = `${product.model} - ${product.brand} - Yinkor`;
-const pageDesc = product.description.slice(0, 160);
-const metadata = { title: pageTitle, description: pageDesc };
-
-// 构造 Product Schema (JSON-LD)
-const productSchema = {
-  "@context": "https://schema.org/",
-  "@type": "Product",
-  "name": product.model,
-  "brand": { "@type": "Brand", "name": product.brand },
-  "description": product.description,
-  "image": product.image,
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "url": `https://boisterous-gumdrop-e6c668.netlify.app/products/${product.model}`
-  }
-};
+const { title } = Astro.props;
 ---
 
-<Layout metadata={metadata}>
-  <!-- 注入 JSON-LD 结构化数据 -->
-  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
-  
-  <h1>{product.model} – {product.brand}</h1>
-  <p>{product.category} / {product.subcategory} / {product.series}</p>
-  <p>{product.description}</p>
-  <div>
-    <a href={product.datasheet}>Download Datasheet</a>
-    <a href="/contact">Get a Quote</a>
-  </div>
-  
-  <!-- FAQ 部分（后续可再添加 FAQ Schema） -->
-  <h2>Frequently Asked Questions</h2>
-  <div>
-    <h3>Q: {product.faq_q1}</h3>
-    <p>A: {product.faq_a1}</p>
-  </div>
-  <div>
-    <h3>Q: {product.faq_q2}</h3>
-    <p>A: {product.faq_a2}</p>
-  </div>
+<Layout>
+  <h1>{title}</h1>
 </Layout>
